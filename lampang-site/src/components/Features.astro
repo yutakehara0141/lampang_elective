@@ -1,0 +1,44 @@
+---
+const items = [
+  { n: '๑', title: ['地域医療の', '最前線に立てる'], body: 'タイの地域医療を間近で経験する。', alt: '病棟・外来' },
+  { n: '๒', title: ['タイの医学生・', '研修医と学べる'], body: '共通言語は英語。異国の医学生と学びを深める。充実したエコーのレクチャーもあります。', alt: 'カンファレンス' },
+  { n: '๓', title: ['先輩がつなぐから', 'はじめてでも安心'], body: '経験者との面談のあと、現地の担当医師へ直接ご紹介します。', alt: '先輩との面談' },
+];
+---
+<section class="features">
+  <div class="container wrap">
+    <div class="section-head">
+      <p class="kicker">＼ ランパーン留学の3つの特徴 ／</p>
+      <h2 class="h2">ここでしか出会えない学びがある</h2>
+    </div>
+    <div class="row">
+      {items.map((it) => (
+        <article class="item">
+          <span class="badge thai" aria-hidden="true">{it.n}</span>
+          <div role="img" aria-label={`写真の差し替え枠：${it.alt}`} class="photo photo-ph">PHOTO</div>
+          <h3>{it.title[0]}<br />{it.title[1]}</h3>
+          <p>{it.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .features { padding: 0 24px 120px; }
+  .wrap { display: flex; flex-direction: column; gap: 56px; }
+  .h2 { font-size: clamp(26px, 3vw, 38px) !important; }
+  .row { display: flex; flex-wrap: wrap; gap: 32px; }
+  .item {
+    flex: 1 1 300px; min-width: 0; position: relative; background: #fff; border: 1.5px solid var(--ink); border-radius: 24px;
+    padding: 48px 28px 36px; display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center;
+  }
+  .badge {
+    position: absolute; top: -22px; left: 50%; transform: translateX(-50%); width: 46px; height: 46px; border-radius: 999px;
+    background: var(--marigold); border: 1.5px solid var(--ink); display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 20px;
+  }
+  .photo { width: 160px; height: 160px; border-radius: 80px 80px 12px 12px; }
+  h3 { font-size: 22px; line-height: 1.5; color: var(--cta); }
+  .item p { font-size: 14px; color: var(--ink-2); }
+</style>

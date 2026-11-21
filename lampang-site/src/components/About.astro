@@ -1,0 +1,44 @@
+---
+const stats = [
+  { label: '創立', value: '1930', unit: '年', note: 'のちに県の地域中核病院へ' },
+  { label: '医学教育センター', value: 'CPIRD', unit: '', note: 'チェンマイ大学医学部と連携', detail: '地方で働く医師を増やすための、タイ保健省の医学教育事業' },
+  { label: '[これまでの受け入れ]', value: '[00]', unit: '名', note: '[日本からの留学者数など]' },
+];
+---
+<section id="about" class="about">
+  <div class="inner">
+    <div class="section-head">
+      <span aria-hidden="true" class="script big">About</span>
+      <p class="sub thai">โรงพยาบาลลำปาง</p>
+      <h2>ランパーン病院とは？</h2>
+    </div>
+    <p class="body">ランパーン病院は、タイ保健省の地域中核病院（Regional Hospital）として、ランパーン県と周辺県の医療を支える病院です。チェンマイ大学医学部と連携した医学教育センター（CPIRD）を持ち、タイの医学生・研修医が日々学んでいます。</p>
+    <div class="stats">
+      {stats.map((s) => (
+        <div class="stat">
+          <p class="label">{s.label}</p>
+          <p class="value num">{s.value}{s.unit && <span>{s.unit}</span>}</p>
+          <p class="note">{s.note}</p>
+          {s.detail && <p class="detail">{s.detail}</p>}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about { background: var(--cream); padding: 112px 24px 120px; }
+  .inner { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+  .big { font-size: clamp(64px, 8vw, 104px) !important; }
+  .body { font-size: 16px; color: var(--ink-2); max-width: 760px; }
+  .stats { width: 100%; display: flex; flex-wrap: wrap; gap: 20px; margin-top: 24px; }
+  .stat {
+    flex: 1 1 260px; background: #fff; border-radius: 20px; padding: 28px 24px; border-top: 6px solid var(--gold);
+    display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
+  }
+  .label { font-size: 13px; font-weight: 700; color: var(--ink-3); }
+  .value { font-size: 48px; font-weight: 600; line-height: 1.1; color: var(--red); }
+  .value span { font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 18px; font-weight: 700; }
+  .note { font-size: 13px; color: var(--ink-2); }
+  .detail { font-size: 12px; color: var(--ink-3); line-height: 1.6; margin-top: 6px; }
+</style>

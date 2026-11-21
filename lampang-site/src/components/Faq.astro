@@ -1,0 +1,45 @@
+---
+const faqs = [
+  { q: '英語に自信がなくても大丈夫ですか？', a: '基本的な英語が話すことができれば高度な英語能力は要求しません。' },
+  { q: '何年生から参加できますか？', a: '医学部2年生から研修医2年目までを対象にしています。それ以外の学年についてはご相談ください。' },
+  { q: '大学の選択実習として認められますか？', a: '所属大学によって異なります。所属大学の担当に問い合わせてください。' },
+  { q: '相談したら必ず行かないといけませんか？', a: 'いいえ。話を聞いてみて、行かないと決めても大丈夫です。' },
+];
+---
+<section id="faq" class="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span aria-hidden="true" class="script">Q&amp;A</span>
+      <p class="sub thai">คำถามที่พบบ่อย</p>
+      <h2>よくある質問</h2>
+    </div>
+    <div class="list">
+      {faqs.map((f) => (
+        <details>
+          <summary>
+            <span aria-hidden="true" class="mark q num">Q</span>
+            <span class="text">{f.q}</span>
+            <span aria-hidden="true" class="plus">＋</span>
+          </summary>
+          <p class="answer"><span aria-hidden="true" class="mark a num">A</span><span>{f.a}</span></p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq { padding: 120px 24px; }
+  .wrap { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+  .list { display: flex; flex-direction: column; gap: 14px; }
+  details { background: #fff; border: 1.5px solid var(--line); border-radius: 16px; padding: 0 24px; }
+  summary { display: flex; align-items: center; gap: 16px; padding: 20px 0; font-size: 16px; font-weight: 700; cursor: pointer; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  .text { flex: 1; }
+  .plus { color: var(--red); font-size: 20px; transition: transform 0.2s ease; }
+  details[open] .plus { transform: rotate(45deg); }
+  .mark { flex: 0 0 36px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+  .q { background: var(--cta); color: #fff; }
+  .a { background: var(--marigold); color: var(--ink); }
+  .answer { display: flex; gap: 16px; padding: 0 0 22px; font-size: 15px; color: var(--ink-2); }
+</style>

@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import Band from '../components/Band.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Town from '../components/Town.astro';
+import Features from '../components/Features.astro';
+import Flow from '../components/Flow.astro';
+import Faq from '../components/Faq.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base>
+  <Band id="band-top" variant="red" />
+  <Header />
+  <main>
+    <Hero />
+    <Band id="band-2" variant="green" />
+    <About />
+    <Town />
+    <Features />
+    <Flow />
+    <Faq />
+    <Band id="band-3" variant="red" />
+    <Contact />
+  </main>
+  <Footer />
+</Base>

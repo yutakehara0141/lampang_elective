@@ -1,0 +1,76 @@
+---
+const steps = [
+  { title: 'フォームで相談', body: 'まずはフォームで気軽にお問い合わせください。' },
+  { title: 'オンライン面談', body: '30分〜1時間の面談を予定しています。先輩の体験記もここでご紹介します。' },
+  { title: '現地医師へのご紹介', body: 'ランパーン病院の担当医師とのLINEグループを作ります。', highlight: true },
+  { title: '準備して出発！', body: '書類・宿泊・保険を準備します。' },
+];
+const overview = [
+  { k: '対象', v: ['医学部2年生から卒後2年目まで（医学部4年以降が望ましい）。'] },
+  { k: '期間', v: ['数日から2週間程度（最大4週間）。担当者不在時は受け入れ不可。'] },
+  { k: '診療科', v: ['救急科'] },
+  { k: '費用の目安', v: ['実習費：無料', '渡航費：6〜8万円程度※各自手配', '宿舎：寮またはホテル'] },
+  { k: '言語', v: ['英語・タイ語'] },
+];
+---
+<section id="flow" class="flow">
+  <div class="container wrap">
+    <div class="section-head">
+      <span aria-hidden="true" class="script">Flow</span>
+      <p class="sub thai">ขั้นตอน</p>
+      <h2>留学までの流れ</h2>
+      <p class="lead">「まだ行くか決めていない」段階での相談も大歓迎です。</p>
+    </div>
+    <ol class="steps">
+      {steps.map((s, i) => (
+        <li class:list={['step', { hl: s.highlight }]}>
+          <span class="no num">STEP {i + 1}</span>
+          <h3>{s.title}</h3>
+          <p>{s.body}</p>
+        </li>
+      ))}
+    </ol>
+    <div class="overview">
+      <div class="ov-head">
+        <h2>留学の概要</h2>
+        <p>条件は年度や受け入れ状況で変わります。最新情報は面談でお伝えします。</p>
+      </div>
+      <dl>
+        {overview.map((row) => (
+          <div class="row">
+            <dt><span>{row.k}</span></dt>
+            <dd>{row.v.map((line, i) => <>{i > 0 && <br />}{line}</>)}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>
+
+<style>
+  .flow { background: var(--cream); padding: 120px 24px; }
+  .wrap { display: flex; flex-direction: column; gap: 56px; }
+  .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 36px 20px; }
+  .step {
+    flex: 1 1 200px; min-width: 0; position: relative; background: #fff; border-radius: 20px; padding: 40px 20px 28px;
+    display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
+  }
+  .step.hl { box-shadow: 0 0 0 3px var(--marigold); }
+  .no {
+    position: absolute; top: -18px; left: 50%; transform: translateX(-50%); padding: 4px 16px; border-radius: 999px;
+    background: var(--cta); color: #fff; font-weight: 600; font-size: 14px; letter-spacing: 0.1em; white-space: nowrap;
+  }
+  .step.hl .no { background: var(--red); }
+  .step h3 { font-size: 18px; }
+  .step p { font-size: 13px; color: var(--ink-2); }
+  .overview { background: #fff; border-radius: 28px; padding: 48px clamp(20px, 4vw, 56px); display: flex; flex-direction: column; gap: 28px; }
+  .ov-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; }
+  .ov-head h2 { font-size: 24px; }
+  .ov-head p { font-size: 13px; color: var(--ink-3); }
+  dl { margin: 0; display: flex; flex-direction: column; }
+  .row { display: flex; flex-wrap: wrap; gap: 6px 24px; padding: 18px 0; border-top: 1px dashed var(--line-2); }
+  .row:last-child { border-bottom: 1px dashed var(--line-2); }
+  dt { flex: 0 0 140px; }
+  dt span { display: inline-block; padding: 2px 14px; background: var(--cream); border-radius: 999px; font-weight: 700; font-size: 14px; color: #8A3A12; }
+  dd { flex: 1 1 320px; margin: 0; }
+</style>

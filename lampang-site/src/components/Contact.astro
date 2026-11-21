@@ -1,0 +1,122 @@
+---
+import Arrow from './Arrow.astro';
+
+// 送信先：Google フォームの formResponse URL。
+// .env の PUBLIC_FORM_ENDPOINT で上書きできます（未設定なら下のフォームに送信）。
+const endpoint =
+  import.meta.env.PUBLIC_FORM_ENDPOINT ||
+  'https://docs.google.com/forms/d/1QfNY70XKrQo_DNAS1yrUXUqQW7GSk4aa2VnMZ-l8HPc/formResponse';
+// 相談窓口の note のリンク（未定なら空のまま）
+const noteUrl = '';
+---
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="section-head head">
+      <span aria-hidden="true" class="script">Contact</span>
+      <p class="sub thai">ติดต่อเรา</p>
+      <h2>まずは、話してみよう。</h2>
+      <p class="lead">いただいた内容をもとに、オンライン面談の日程をご連絡します。</p>
+    </div>
+    <div class="box">
+      <div class="person">
+        <div role="img" aria-label="窓口担当者の写真" class="face"></div>
+        <p class="badge">相談窓口</p>
+        <p class="name">運営</p>
+        <p class="role">医師</p>
+        {noteUrl && <a href={noteUrl} target="_blank" rel="noopener" class="note">noteを見る →</a>}
+      </div>
+      <form class="form" id="contact-form" action={endpoint} method="POST" data-endpoint={endpoint}>
+        <div class="pair">
+          <div class="field">
+            <label for="f-name">お名前 <span class="req">必須</span></label>
+            <input id="f-name" name="entry.862129124" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="f-school">所属・学年 <span class="req">必須</span></label>
+            <input id="f-school" name="entry.1195187849" type="text" placeholder="例）◯◯大学 医学部5年" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-mail">メールアドレス <span class="req">必須</span></label>
+          <input id="f-mail" name="entry.1210582897" type="email" autocomplete="email" required />
+        </div>
+        <div class="pair">
+          <div class="field">
+            <label for="f-when">希望時期</label>
+            <input id="f-when" name="entry.848245008" type="text" placeholder="例）2027年3月ごろ／未定" />
+          </div>
+          <div class="field">
+            <label for="f-from">このページを知ったきっかけ</label>
+            <select id="f-from" name="entry.681118877">
+              <option>noteの記事</option>
+              <option>体験記を書いた人からの紹介</option>
+              <option>大学・先輩から</option>
+              <option>SNS</option>
+              <option>その他</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-msg">相談したいこと・関心のあること</label>
+          <textarea id="f-msg" name="entry.893536925" rows="4"></textarea>
+        </div>
+        <label for="f-meet" class="check">
+          <input id="f-meet" name="entry.786577332" type="checkbox" value="希望する" />オンライン面談を希望する
+        </label>
+        <p class="small">いただいた情報は、留学の相談・調整の目的にのみ使用します。削除や利用停止のご依頼は、運営の連絡先までお知らせください。</p>
+        <div class="submit">
+          <button type="submit" class="btn btn-primary">相談を送信する <Arrow /></button>
+          <p id="form-status" class="status" role="status" aria-live="polite" hidden></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Google フォームへ送信（画面遷移せず、送信後にメッセージを表示）
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    btn.disabled = true;
+    try {
+      await fetch(form.dataset.endpoint!, { method: 'POST', mode: 'no-cors', body: new FormData(form) });
+      form.reset();
+      if (status) { status.hidden = false; status.textContent = '送信しました。ありがとうございます。内容を確認のうえ、メールでご連絡します。'; }
+    } catch {
+      btn.disabled = false;
+      if (status) { status.hidden = false; status.textContent = '送信に失敗しました。通信環境をご確認のうえ、もう一度お試しください。'; }
+    }
+  });
+</script>
+
+<style>
+  .contact { background: var(--cta); padding: 112px 24px; }
+  .wrap { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+  .head { color: #fff; }
+  .head .script { color: var(--marigold); }
+  .head .sub { color: #F3D9A8; }
+  .head h2 { font-size: clamp(26px, 3vw, 38px); }
+  .head .lead { color: #E6EFE9; }
+  .box { background: var(--ivory); border-radius: 28px; padding: 48px clamp(20px, 4vw, 56px); display: flex; flex-wrap: wrap; gap: 40px 56px; }
+  .person { flex: 1 1 220px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+  .face { width: 112px; height: 112px; border-radius: 999px; background: var(--cream); box-shadow: 0 0 0 4px var(--ivory), 0 0 0 6px var(--gold); }
+  .badge { font-size: 12px; font-weight: 700; padding: 3px 12px; background: var(--marigold); border-radius: 999px; }
+  .name { font-size: 20px; font-weight: 900; }
+  .role { font-size: 13px; color: var(--ink-2); }
+  .note { font-size: 13px; font-weight: 700; }
+  .form { flex: 3 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 22px; }
+  .pair { display: flex; flex-wrap: wrap; gap: 22px; }
+  .pair .field { flex: 1 1 220px; }
+  .check {
+    display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 10px 16px; background: var(--cream);
+    border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer;
+  }
+  .check input { width: 22px; height: 22px; margin: 0; accent-color: var(--cta); }
+  .small { font-size: 12px; color: var(--ink-3); }
+  .submit { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .status { font-size: 14px; font-weight: 700; color: var(--cta); text-align: center; }
+  .submit .btn { min-height: 60px; padding: 0 56px; font-size: 17px; letter-spacing: 0.08em; }
+</style>

@@ -1,0 +1,33 @@
+---
+import Arrow from './Arrow.astro';
+
+---
+<section id="top" class="hero">
+  <p aria-hidden="true" class="bg-word thai">ลำปาง</p>
+  <div class="container inner">
+    <p class="eyebrow">医学生・研修医のための 北タイ臨床留学</p>
+    <h1>いってみよう、<span class="nowrap"><span class="accent">ランパーン</span>へ。</span></h1>
+    <p class="lead">タイ北部、ランナー文化の残る街・ランパーン。留学希望者は現地の担当医師におつなぎします。</p>
+    <div class="actions">
+      <a href="#contact" class="btn btn-primary">まずは相談してみる <Arrow /></a>
+      <a href="#flow" class="btn btn-outline">留学までの流れを見る</a>
+    </div>
+    <svg aria-hidden="true" width="120" height="36" viewBox="0 0 120 36" fill="none" stroke="#C8963E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 16px"><path d="M60 6c-6 6-6 16 0 24 6-8 6-18 0-24z" /><path d="M60 30c-8-2-14-8-16-16 8 0 14 6 16 16zM60 30c8-2 14-8 16-16-8 0-14 6-16 16z" /><path d="M2 30h40M78 30h40" /><circle cx="46" cy="30" r="1.5" fill="#C8963E" /><circle cx="74" cy="30" r="1.5" fill="#C8963E" /></svg>
+  </div>
+</section>
+
+<style>
+  .hero { position: relative; padding: 72px 0 88px; }
+  .bg-word {
+    position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
+    font-weight: 600; font-size: clamp(120px, 20vw, 300px); line-height: 1; color: #F7E4C2;
+    white-space: nowrap; pointer-events: none;
+  }
+  .inner { position: relative; padding: 0 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+  .eyebrow { font-size: clamp(18px, 2vw, 24px); font-weight: 700; color: var(--red); letter-spacing: 0.12em; }
+  h1 { font-size: clamp(40px, 6vw, 84px); line-height: 1.25; letter-spacing: 0.06em; }
+  .accent { color: var(--cta); }
+  .nowrap { white-space: nowrap; }
+  .lead { font-size: 16px; color: var(--ink-2); max-width: 640px; }
+  .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 8px; }
+</style>
